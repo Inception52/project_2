@@ -5,15 +5,15 @@ one:
   Website: MyString
   Address: MyString
   Size: 1.5
-  Founded: 
+  Founded: 1
   Revenue: MyString
-  Synopsis: MyString
+  Synopsis: MyText
 
 two:
   Name: MyString
   Website: MyString
   Address: MyString
   Size: 1.5
-  Founded: 
+  Founded: 1
   Revenue: MyString
-  Synopsis: MyString
+  Synopsis: MyText
