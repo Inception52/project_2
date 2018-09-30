@@ -1,0 +1,23 @@
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: @user %>
+
+  <%= f.label :Name %>
+  <%= f.text_field :Name, class: 'form-control' %>
+
+  <%= f.label :Website %>
+  <%= f.email_field :Website, class: 'form-control' %>
+
+  <%= f.label :Address %>
+  <%= f.email_field :Address, class: 'form-control' %>
+  
+  <%= f.label :Size %>
+  <%= f.email_field :Size, class: 'form-control' %>
+  
+  <%= f.label :Founded %>
+  <%= f.email_field :Founded, class: 'form-control' %>
+  
+  <%= f.label :Revenue %>
+  <%= f.email_field :Revenue, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

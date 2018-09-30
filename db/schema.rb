@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_30_010912) do
+ActiveRecord::Schema.define(version: 2018_09_30_211004) do
 
   create_table "companies", force: :cascade do |t|
     t.string "Name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_09_30_010912) do
     t.text "Synopsis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["Website"], name: "index_companies_on_Website", unique: true
   end
 
   create_table "users", force: :cascade do |t|

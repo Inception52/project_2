@@ -3,9 +3,9 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-		<%= link_to "Create Company", createc_path, class: "btn btn-lg btn-primary" %>
+        <%= gravatar_for @company %>
+        <%= @company.Name %>
+		<%= @company.Website %>
       </h1>
     </section>
   </aside>
