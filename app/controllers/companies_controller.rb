@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
   end
   
   def create
-    @company = Company.new(user_params)
+    @company = Company.new(company_params)
     if @company.save
       flash[:success] = "establish successfully"
       redirect_to @company

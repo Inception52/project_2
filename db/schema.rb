@@ -12,6 +12,27 @@
 
 ActiveRecord::Schema.define(version: 2018_09_30_211004) do
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "Name"
     t.string "Website"
@@ -23,6 +44,22 @@ ActiveRecord::Schema.define(version: 2018_09_30_211004) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["Website"], name: "index_companies_on_Website", unique: true
+  end
+
+  create_table "houses", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "location"
+    t.integer "square_footage"
+    t.integer "year"
+    t.string "style"
+    t.integer "price"
+    t.integer "floors"
+    t.boolean "basement"
+    t.string "owner"
+    t.string "contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_houses_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
