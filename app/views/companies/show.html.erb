@@ -2,10 +2,17 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="company_info">
-      <h1>
-        <%= @company.Name %>
-		<%= @company.Website %>
-      </h1>
+	
+      <p><strong>Name:</strong><%= @company.Name %></p>
+	  <p><strong>Website:</strong><%= @company.Website %></p>
+	  <p><strong>Address:</strong><%= @company.Address %></p>
+	  <p><strong>Size:</strong><%= @company.Size %></p>
+	  <p><strong>Founded:</strong><%= @company.Founded %></p>
+	  <p><strong>Revenue:</strong><%= @company.Revenue %></p>
+	  <p><strong>Synopsis:</strong><%= @company.Synopsis %></p>
+	  
+	  <%= link_to 'Edit', edit_company_path(@company) %>
+	  <%= link_to 'Back', companies_path %>
     </section>
   </aside>
 </div>

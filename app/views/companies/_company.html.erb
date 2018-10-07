@@ -1,4 +1,10 @@
 <li>
   <%= link_to company.Name, company %>
+  <%= company.Website %>
+  <%= company.Address %>
+  <%= company.Size %>
+  <%= company.Founded %>
+  <%= company.Revenue %>
+  <%= company.Synopsis %>
   <%= link_to "delete", company, method: :delete, data: { confirm: "You sure?" } %>
 </li>

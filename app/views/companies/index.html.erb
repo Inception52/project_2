@@ -3,8 +3,38 @@
 
 <%= will_paginate %>
 
-<ul class="companies">
-  <%= render @companies %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name &emsp;&emsp;&emsp;</th>
+      <th>Website &emsp;&emsp;&emsp;</th>
+      <th>Address &emsp;&emsp;&emsp;</th>
+      <th>Size &emsp;&emsp;&emsp;</th>
+      <th>Founded &emsp;&emsp;&emsp;</th>
+      <th>Revenue &emsp;&emsp;&emsp;</th>
+      <th>Synopsis &emsp;&emsp;&emsp;</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
+  <tbody>
+
+	<% @companies.each do |company| %>
+      <tr>
+        <td><%= company.Name %></td>
+        <td><%= company.Website %></td>
+        <td><%= company.Address %></td>
+        <td><%= company.Size %></td>
+        <td><%= company.Founded %></td>
+        <td><%= company.Revenue %></td>
+        <td><%= company.Synopsis %></td>
+        <td><%= link_to 'Show', company %>&nbsp;</td>
+        <td><%= link_to 'Edit', edit_company_path(company) %>&nbsp;</td>
+        <td><%= link_to 'Delete', company, method: :delete, data: { confirm: 'Are you sure?' } %>&nbsp;</td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>	
+	
 <%= will_paginate %>
