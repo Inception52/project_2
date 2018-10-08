@@ -3,11 +3,46 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-		<%= link_to "Create Company", createc_path, class: "btn btn-lg btn-primary" %>
-		<%= link_to "View Companies", companies_path, class: "btn btn-lg btn-primary" %>
-      </h1>
+		
+        <p><%= @user.name %></p>
+		
+		<% if current_user.admin? && current_user?(@user) %>
+			<p>
+			<%= link_to "Create Company", createc_path, class: "btn btn-lg btn-primary" %>
+			</p>
+			<p>
+			<%= link_to "View Companies", companies_path, class: "btn btn-lg btn-primary" %>
+			</p>
+			<p>
+			<%= link_to "Create Users", new_user_path, class: "btn btn-lg btn-primary" %>
+			</p>
+			<p>
+			<%= link_to "View Houses", houses_path, class: "btn btn-lg btn-primary" %>
+			</p>
+			<p>
+			<%= link_to "Edit Proile", edit_user_path, class: "btn btn-lg btn-primary" %>
+			</p>
+        <% end %>
+		
+		<% if current_user.realtor?  && current_user?(@user) %>
+			<p><%= @user.email %></p>
+			<p>
+			<%= link_to "Create House", new_house_path, class: "btn btn-lg btn-primary" %>
+			</p>
+			<p>
+			<%= link_to "View Houses", houses_path, class: "btn btn-lg btn-primary" %>
+			</p>
+			<p>
+			<%= link_to "Edit Profile", edit_user_path, class: "btn btn-lg btn-primary" %>
+			</p>
+        <% end %>
+		
+		<% if current_user.realtor?  && !current_user?(@user) %>
+			<p><%= @user.email %></p>
+        <% end %>
+		
+		
+	  </h1>
     </section>
   </aside>
 </div>
