@@ -1,0 +1,6 @@
+<h1>Editing Inqury</h1>
+
+<%= render 'form', inqury: @inqury, pid: @pid %>
+
+<%= link_to 'Show', inqury_path(@inqury, :pid => @pid) %> |
+<%= link_to 'Back', inquries_path(:pid => @pid) %>

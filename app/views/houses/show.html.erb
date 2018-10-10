@@ -54,6 +54,31 @@
   <%= image_tag(@house.image, style: 'width:100%') %>
 <% end %>
 
+<thead>
+    <tr>
+      <th>Subject</th>
+      <th>Content</th>
+      <th>Reply</th>
+	  <th colspan="3"></th>
+    </tr>
+</thead>
+<% Pbuyer.all.each do |pbuyer| %>
+	<%if @house.id == pbuyer.house_id %>
+		<% Inqury.all.each do |inqury| %>
+			<%if pbuyer.id == inqury.pbuyer_id %>
+				<%= inqury.subject %>
+				<%= inqury.content %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<%if(@interest == 1) %>
+  <%= link_to 'show my interest list', pbuyers_path%>
+<%else %>
+  <%= link_to 'add to my interest list', pbuyers_path(:house_id=>@house.id, :user_id=>session[:user_id]), method: :post%>
+<%end %>
+
 <% if current_user.name.eql? 'Admin' %>
   <td><%= link_to 'Edit', edit_house_path(@house) %> |</td>
 <% end %>

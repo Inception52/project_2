@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pbuyers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>company</th>
+      <th>price</th>
+      <th>location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pbuyers.each do |pbuyer| %>
+      <tr>
+        <td><%= Company.find(House.find(pbuyer.house_id).company_id).Name %></td>
+        <td><%= House.find(pbuyer.house_id).price %></td>
+        <td><%= House.find(pbuyer.house_id).location%></td>
+        <td><%= link_to 'Show house', house_path(pbuyer.house_id) %></td>
+        <td><%= link_to 'View my inquries', inquries_path(:pid=>pbuyer.id) %></td>
+        <td><%= link_to 'Destroy', pbuyer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+
+

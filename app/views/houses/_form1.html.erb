@@ -1,0 +1,43 @@
+<%=form_tag(whouses_search_path, method: "post") do%>
+
+  <h3>
+    Price
+  </h3>
+  <div>
+    <%= label_tag :low %>
+    <%= text_field_tag (:plow) %>
+  </div>
+
+  <div>
+    <%= label_tag :high %>
+    <%= text_field_tag (:phigh) %>
+  </div>
+
+
+  <h3>
+    Square footage
+  </h3>
+  <div>
+    <%= label_tag :low %>
+    <%= text_field_tag (:slow) %>
+  </div>
+
+  <div>
+    <%= label_tag :high %>
+    <%= text_field_tag (:shigh) %>
+  </div>
+
+  <h3>
+    Location
+  </h3>
+  <div>
+    <%= label_tag :location %>
+    <%= text_field_tag (:location) %>
+  </div>
+<br/>
+
+  <div>
+    <%= submit_tag("Search") %>
+  </div>
+
+<%end %>

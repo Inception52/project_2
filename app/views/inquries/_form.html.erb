@@ -1,0 +1,29 @@
+<%= form_with(model: inqury, local: true) do |form| %>
+  <% if inqury.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(inqury.errors.count, "error") %> prohibited this inqury from being saved:</h2>
+
+      <ul>
+      <% inqury.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :subject %>
+    <%= form.text_field :subject %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <%=form.hidden_field :pbuyer_id, :value=>@pid %>
+
+  <div class="actions">
+    <%= form.submit(:pid => @pid) %>
+  </div>
+<% end %>

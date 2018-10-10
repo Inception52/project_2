@@ -1,0 +1,8 @@
+<h1>Search House</h1>
+<% flash.each do |message_type, message| %>
+  <div <%= message_type %>"><%= message %></div>
+<% end %>
+
+<%= render 'form1' %>
+
+<%= link_to 'Back', whouses_path %>

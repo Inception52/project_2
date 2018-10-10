@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_182357) do
+ActiveRecord::Schema.define(version: 2018_10_10_011328) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,6 +63,25 @@ ActiveRecord::Schema.define(version: 2018_10_07_182357) do
     t.index ["company_id"], name: "index_houses_on_company_id"
   end
 
+  create_table "inquries", force: :cascade do |t|
+    t.integer "pbuyer_id"
+    t.string "subject"
+    t.string "content"
+    t.string "reply"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pbuyer_id"], name: "index_inquries_on_pbuyer_id"
+  end
+
+  create_table "pbuyers", force: :cascade do |t|
+    t.integer "house_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["house_id"], name: "index_pbuyers_on_house_id"
+    t.index ["user_id"], name: "index_pbuyers_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -72,6 +91,7 @@ ActiveRecord::Schema.define(version: 2018_10_07_182357) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin"
+    t.boolean "switch", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

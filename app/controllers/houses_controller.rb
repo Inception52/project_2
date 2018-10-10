@@ -11,6 +11,25 @@ class HousesController < ApplicationController
   # GET /houses/1
   # GET /houses/1.json
   def show
+	if(current_user.hunter? && current_user.realtor?)
+		if(current_user.switch?)
+			ifInterest = Pbuyer.where("house_id = ? AND user_id = ? ", @house.id, session[:user_id]).all
+			if(ifInterest.length > 0)
+			  @interest = 1
+			else
+			  @interest = 0
+			end
+		end
+	end
+	if(current_user.hunter? && !(current_user.realtor?))
+		ifInterest = Pbuyer.where("house_id = ? AND user_id = ? ", @house.id, session[:user_id]).all
+		if(ifInterest.length > 0)
+			@interest = 1
+		else
+			@interest = 0
+		end
+	end		
+	
   end
 
   # GET /houses/new
@@ -62,6 +81,86 @@ class HousesController < ApplicationController
     end
   end
 
+  def find
+
+  end
+
+  def search
+    plow = 0
+    phigh = house.maximum("price")
+    slow = 0
+    shigh = house.maximum("square_footage")
+    location = ""
+    psql = ""
+    ssql = ""
+
+
+    plow1 = find_params[:plow]
+    phigh1 = find_params[:phigh]
+    slow1 = find_params[:slow]
+    shigh1 = find_params[:shigh]
+    location1 = find_params[:location]
+
+    if(plow1!="")
+      if(plow1 =~ /^[0-9]+([.]{1}[0-9]+){0,1}$/)
+          plow = plow1
+        else
+        flash.now[:danger] = "Invalid low price, please enter a number bigger than 0"
+        render 'find'
+        return
+      end
+    end
+
+    if(phigh1!="")
+      if(phigh1 =~ /^[0-9]+([.]{1}[0-9]+){0,1}$/)
+        phigh = phigh1
+      else
+        flash.now[:danger] = "Invalid high price, please enter a number bigger than 0"
+        render 'find'
+        return
+      end
+    end
+
+    if(slow1!="")
+      if(slow1 =~ /^[0-9]+([.]{1}[0-9]+){0,1}$/)
+        slow = slow1
+      else
+        flash.now[:danger] = "Invalid low square footage, please enter a number bigger than 0"
+        render 'find'
+        return
+      end
+    end
+
+    if(shigh1!="")
+      if(shigh1 =~ /^[0-9]+([.]{1}[0-9]+){0,1}$/)
+        shigh = shigh1
+      else
+        flash.now[:danger] = "Invalid high square footage, please enter a number bigger than 0"
+        render 'find'
+        return
+      end
+    end
+
+    if(location1!="")
+      if(location1 =~ /^[0-9a-zA-Z]+$/)
+        location = location1
+      else
+        flash.now[:danger] = "Invalid location, please enter a valid location"
+        render 'find'
+        return
+      end
+    end
+
+    if(location!="")
+    @shouses = house.where("price BETWEEN ? AND ? AND square_footage BETWEEN ? AND ? AND location like ?", plow, phigh,slow,shigh,location).all
+    else
+      @shouses = house.where("price BETWEEN ? AND ? AND square_footage BETWEEN ? AND ? ", plow, phigh,slow,shigh).all
+    end
+
+    @a = slow
+    @b = shigh
+  end  
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_house
@@ -73,6 +172,10 @@ class HousesController < ApplicationController
       params.require(:house).permit(:company_id, :location, :square_footage, :year, :style, :price, :floors, :basement, :owner, :contact, :image)
     end
 
+	def find_params
+      params.permit(:plow, :phigh, :slow, :shigh, :location)
+    end
+	
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?
